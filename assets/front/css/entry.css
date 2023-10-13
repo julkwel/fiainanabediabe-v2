@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;1,100;1,200&display=swap');
+@import "../vendor/bootstrap/css/bootstrap.min.css";
+@import "../vendor/bootstrap-icons/bootstrap-icons.css";
+@import "../vendor/swiper/swiper-bundle.min.css";
+@import "../vendor/glightbox/css/glightbox.min.css";
+@import "../vendor/aos/aos.css";
+@import "./variables.css";
+@import "./main.css";
