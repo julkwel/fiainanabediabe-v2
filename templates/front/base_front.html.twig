@@ -7,14 +7,16 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('front') }}
     {% endblock %}
-
-    {% block javascripts %}
-        {{ encore_entry_script_tags('front') }}
-    {% endblock %}
 </head>
 <body>
 {% include 'front/templating/_navigation.html.twig' %}
+
 {% block body %}{% endblock %}
+
 {% include 'front/templating/_footer.html.twig' %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('front') }}
+{% endblock %}
 </body>
 </html>

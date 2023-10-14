@@ -15,6 +15,7 @@ class SlideType extends AbstractType
     {
         $builder
             ->add('alt')
+            ->add('description')
             ->add(
                 'image',
                 FileType::class, [

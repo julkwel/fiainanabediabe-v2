@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\SlideRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SlideRepository::class)]
@@ -18,6 +19,12 @@ class Slide
 
     #[ORM\Column(type: 'text')]
     private ?string $image = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $enable = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
 
     public function getId(): ?int
     {
@@ -44,6 +51,37 @@ class Slide
     public function setImage(string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function isEnable(): ?bool
+    {
+        return $this->enable;
+    }
+
+    public function setEnable(?bool $enable): static
+    {
+        $this->enable = $enable;
+
+        return $this;
+    }
+
+    public function updateState()
+    {
+        $this->enable = !$this->isEnable();
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
