@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -14,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @method string getUserIdentifier()
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable, EquatableInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -32,6 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $password = null;
+    private ?string $salt = null;
 
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
@@ -169,4 +172,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    // extra methode for authentication
+    public function serialize(): ?string
+    {
+        return serialize(array($this->id, $this->username, $this->password, $this->salt));
+    }
+
+    public function unserialize(?string $data)
+    {
+        list($this->id, $this->username, $this->password, $this->salt) = unserialize($data, array('allowed_classes' => false));
+    }
+
+    public function isEqualTo(UserInterface $user): bool
+    {
+        if (!$user instanceof User) {
+            return false;
+        }
+
+        if ($user->getId() == $this->getId()) {
+            return true;
+        }
+
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
+
+        if ($this->salt !== $user->getSalt()) {
+            return false;
+        }
+
+        if ($this->username !== $user->getUsername()) {
+            return false;
+        }
+
+        return true;
+    }
+
 }
