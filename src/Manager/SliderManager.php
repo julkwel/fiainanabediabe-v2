@@ -18,7 +18,11 @@ class SliderManager extends AbstractManager
     {
         /** @var UploadedFile $imageData */
         $imageData = $form->get('image')->getData();
-        if (!$imageData) return false;
+        if (!$imageData) {
+            $this->save($slide);
+
+            return true;
+        }
 
         $newFilename = $this->uploadFile($this->parameterBag->get('image_dir'), $imageData);
         if ($newFilename) {

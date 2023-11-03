@@ -39,4 +39,21 @@ class UserManager extends AbstractManager
         $this->save($user);
         $io->success("User create with success : $username");
     }
+
+    public function removeUser(SymfonyStyle $io, string $username)
+    {
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
+
+        if (!$user) {
+            $io->error("Unable to find user $username");
+            return;
+        }
+
+        if ($io->confirm("Voulez-vous supprimer vraiment $username")) {
+            $this->entityManager->remove($user);
+            $this->entityManager->flush();
+
+            $io->success("User $username deleted with success !");
+        }
+    }
 }

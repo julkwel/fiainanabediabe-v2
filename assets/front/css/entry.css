@@ -6,3 +6,28 @@
 @import "../vendor/aos/aos.css";
 @import "./variables.css";
 @import "./main.css";
+
+.header {
+    background: var(--color-red);
+}
+
+.navbar a, .navbar a:focus,.header .logo h1, .position-relative a {
+    color: var(--color-white);
+}
+
+.author .photo img {
+    height: 50px;
+    width: 50px;
+}
+
+.post-content figure {
+    position: relative;
+    left: 52%;
+    min-width: 0;
+    transform: translateX(-53%);
+}
+
+.img-last-post {
+    width: 800px!important;
+    height: 400px!important;
+}

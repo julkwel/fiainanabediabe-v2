@@ -27,6 +27,7 @@ class UserCommand extends Command
         $this
             ->addOption('username', null, InputOption::VALUE_REQUIRED, 'Nom d\'utilisateur')
             ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Mots de passe')
+            ->addOption('remove', null, InputOption::VALUE_REQUIRED, 'Supprimer un utilisateur par username')
             ->addOption('admin', null, InputOption::VALUE_NONE, 'Si administrateur');
     }
 
@@ -35,6 +36,11 @@ class UserCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $username = $input->getOption('username');
         $password = $input->getOption('password');
+
+        if ($input->getOption('remove')) {
+            $this->userManager->removeUser($io, $input->getOption('remove'));
+            exit(0);
+        }
 
         if (!empty($username) && !empty($password)) {
             $this->userManager->createUserViaCommand($io, $username, $password, $input->getOption('admin'));

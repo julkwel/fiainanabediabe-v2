@@ -1267,7 +1267,7 @@ section {
 }
 
 .footer .footer-legal {
-  background: var(--color-black);
+  background: var(--color-red);
   padding: 40px 0;
 }
 

@@ -1,0 +1,15 @@
+{% for post in postsInFooter %}
+    <li>
+        <a href="{{ path('post_view', {'id': post.id}) }}" class="d-flex align-items-center">
+            <img src="{{ asset('images/'~post.couverture) }}" alt="" class="img-fluid me-3">
+            <div>
+                <div class="post-meta d-block">
+                    <span class="date">Fiainana</span>
+                    <span class="mx-1">&bullet;</span>
+                    <span>{{ post.createdAt|date('d-m-Y') }}</span>
+                </div>
+                <span>{{ post.title }}</span>
+            </div>
+        </a>
+    </li>
+{% endfor %}

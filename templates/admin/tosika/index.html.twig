@@ -1,0 +1,43 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block body %}
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Liste tosika</h6>
+            <a href="{{ path('admin_tosika_manage', {'id': 'x'}) }}"><i class="fa fa-plus m-1"></i>Créer un nouveau tosika</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Date de création</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Date de création</th>
+                        <th>Action</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    {% for post in tosikas %}
+                        <tr>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.createdAt|date('d-m-Y') }}</td>
+                            <td>
+                                <a href="{{ path('admin_tosika_manage', {'id': post.id}) }}" type="button" class="btn btn-success btn-sm"><i class="fa fa-edit"></i>Modifier</a>
+                                <a href="{{ path('admin_tosika_delete', {'id': post.id}) }}" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
