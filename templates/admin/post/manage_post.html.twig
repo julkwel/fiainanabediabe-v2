@@ -13,14 +13,14 @@
                 {{ form_row(form.title) }}
                 {{ form_row(form.description) }}
                 {{ form_row(form.couverture) }}
-                <div class="d-flex align-items-center">
-                    <div>Photo précedent :</div>
-                    <div class="div">
-                        {% if post.couverture %}
-                            <img width="150" class="m-3" height="150" src="{{ asset('images/'~post.couverture) }}" alt="">
-                        {% endif %}
+                {% if post.couverture %}
+                    <div class="d-flex align-items-center">
+                        <div>Photo précedent :</div>
+                        <div class="div">
+                                <img width="150" class="m-3" height="150" src="{{ asset('images/'~post.couverture) }}" alt="">
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Enregistrer">
             </div>

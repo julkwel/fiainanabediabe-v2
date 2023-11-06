@@ -6,3 +6,8 @@
 .form-control[type=file] {
     height: auto;
 }
+
+.bg-login-image {
+    background: url("../img/img_2.png");
+    background-size: cover;
+}

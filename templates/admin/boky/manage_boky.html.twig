@@ -1,0 +1,31 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block body %}
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a href="{{ path('admin_boky_list') }}">
+                <i class="fa fa-backward"></i> Revenir dans la liste
+            </a>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_row(form.titre) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.couverture) }}
+            {{ form_row(form.prix) }}
+            {% if boky.couverture %}
+            <div class="d-flex align-items-center">
+                <div>Photo précedent :</div>
+                <div class="div">
+                        <img width="150" class="m-3" height="150" src="{{ asset('images/'~boky.couverture) }}" alt="">
+                </div>
+            </div>
+            {% endif %}
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Enregistrer">
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

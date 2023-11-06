@@ -1,0 +1,45 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block body %}
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Liste boky</h6>
+            <a href="{{ path('admin_boky_manage', {'id': 'x'}) }}">
+                <i class="fa fa-plus m-1"></i>Boky vaovao
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Date de création</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Date de création</th>
+                        <th>Action</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    {% for boky in bokys %}
+                        <tr>
+                            <td>{{ boky.titre }}</td>
+                            <td>{{ boky.createdAt|date('d-m-Y') }}</td>
+                            <td>
+                                <a href="{{ path('admin_boky_manage', {'id': boky.id}) }}" type="button" class="btn btn-success btn-sm"><i class="fa fa-edit"></i>Modifier</a>
+                                <a href="{{ path('admin_boky_delete', {'id': boky.id}) }}" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
