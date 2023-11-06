@@ -1,0 +1,15 @@
+{% extends 'security/base_security.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
+    {{ form_end(form) }}
+{% endblock %}

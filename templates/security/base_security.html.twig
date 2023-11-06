@@ -27,6 +27,13 @@
                                 </div>
                                 {% block body %}{% endblock %}
                                 <hr>
+                                <span>
+                                    {% if create is defined and create %}
+                                        Vous avez déjà un compte ? <a href="{{ path('app_login') }}">se connecter</a>
+                                    {% else %}
+                                        Vous n'avez pas encore un compte ? <a href="{{ path('user_create') }}">créer un</a>
+                                    {% endif %}
+                                </span>
                             </div>
                         </div>
                     </div>

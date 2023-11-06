@@ -48,7 +48,10 @@ class FbdbAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // For example:
+        if (!in_array('ROLE_ADMIN', $token->getUser()->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('app_home_page'));
+        }
+
         return new RedirectResponse($this->urlGenerator->generate('admin_dashboard'));
     }
 

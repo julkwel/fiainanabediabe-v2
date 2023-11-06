@@ -10,6 +10,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -38,6 +39,13 @@ class UserManager extends AbstractManager
 
         $this->save($user);
         $io->success("User create with success : $username");
+    }
+
+    public function createUser(FormInterface $form, User $user): void
+    {
+        $user->setPassword($this->passwordHasher->hashPassword($user, $form->get('password')->getData()));
+
+        $this->save($user);
     }
 
     public function removeUser(SymfonyStyle $io, string $username)

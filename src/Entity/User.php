@@ -26,7 +26,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $username = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -40,19 +40,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private ?string $salt = null;
 
     #[ORM\Column(type: Types::JSON)]
-    private array $roles = [];
+    private array $roles = ['ROLE_USER'];
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $profilPic = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Post::class)]
     private Collection $posts;
-
-    public function __construct()
-    {
-        $this->posts = new ArrayCollection();
-        $this->roles = ['ROLE_USER'];
-    }
 
     public function getId(): ?int
     {
